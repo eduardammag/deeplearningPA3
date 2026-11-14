@@ -2,3 +2,14 @@
 /resultados/
 /.venv/
 __pycache__/
+
+# Pacotes exportados e checkpoints: manter fora do histórico Git
+*.zip
+*.pt
+*.pth
+*.ckpt
+*.pt.resume
+*.pt.resume.tmp
+
+# Arquivos temporários de notebooks
+.ipynb_checkpoints/
