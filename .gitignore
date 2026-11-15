@@ -10,6 +10,7 @@ __pycache__/
 *.ckpt
 *.pt.resume
 *.pt.resume.tmp
+!modelo_entregue.pt
 
 # Arquivos temporários de notebooks
 .ipynb_checkpoints/
