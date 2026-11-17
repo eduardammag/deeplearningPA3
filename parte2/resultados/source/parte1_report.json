@@ -1,0 +1,166 @@
+{
+  "method": "SimCLR com ResNet-18",
+  "seed": 42,
+  "image_size": 224,
+  "ssl_epochs": 100,
+  "linear_epochs": 100,
+  "finetune_epochs": 30,
+  "preliminary": false,
+  "configuration_notes": [],
+  "runtime": {
+    "device": "cuda",
+    "torch_version": "2.11.0+cu130"
+  },
+  "augmentations": {
+    "standard": {
+      "random_resized_crop_scale": [
+        0.08,
+        1.0
+      ],
+      "description": "RandomResizedCrop padrão: pode manter apenas uma fração pequena da imagem e remover o animal."
+    },
+    "context_preserving": {
+      "random_resized_crop_scale": [
+        0.5,
+        1.0
+      ],
+      "description": "Mudança experimental: restringe a área mínima do crop a 50%, preservando mais contexto; não garante que o animal esteja no crop."
+    }
+  },
+  "selection_rule": "Maior F1 macro no val do fine-tuning; desempate pela menor perda.",
+  "selected_augmentation": "context_preserving",
+  "selected_validation_macro_f1": 0.3733552753829148,
+  "part0_floor": {
+    "augmentation": "part0",
+    "evaluation": "floor",
+    "initialization": "imagenet_finetune",
+    "best_epoch": 22,
+    "val_macro_f1": null,
+    "test_public_macro_f1": 0.43018771938847633,
+    "test_public_accuracy": 0.45499383477188654,
+    "test_public_loss": 1.7985973242031807
+  },
+  "augmentation_comparison": [
+    {
+      "augmentation": "standard",
+      "finetune_val_macro_f1": 0.3613686334589057,
+      "finetune_test_public_macro_f1": 0.3928714163222696,
+      "finetune_test_public_accuracy": 0.42909987669543775
+    },
+    {
+      "augmentation": "context_preserving",
+      "finetune_val_macro_f1": 0.3733552753829148,
+      "finetune_test_public_macro_f1": 0.34070969543617774,
+      "finetune_test_public_accuracy": 0.38224414303329224
+    }
+  ],
+  "metrics": [
+    {
+      "augmentation": "part0",
+      "evaluation": "floor",
+      "initialization": "imagenet_finetune",
+      "best_epoch": 22,
+      "val_macro_f1": null,
+      "test_public_macro_f1": 0.43018771938847633,
+      "test_public_accuracy": 0.45499383477188654,
+      "test_public_loss": 1.7985973242031807
+    },
+    {
+      "augmentation": "standard",
+      "evaluation": "linear",
+      "initialization": "imagenet_only",
+      "best_epoch": 76,
+      "val_macro_f1": 0.4324401602132694,
+      "val_loss": 2.0479743480682373,
+      "test_public_macro_f1": 0.47752919786325354,
+      "test_public_accuracy": 0.5117139334155364,
+      "test_public_loss": 1.8264379501342773,
+      "num_test_public": 811
+    },
+    {
+      "augmentation": "standard",
+      "evaluation": "linear",
+      "initialization": "imagenet_ssl",
+      "best_epoch": 25,
+      "val_macro_f1": 0.32183802773143766,
+      "val_loss": 2.4317052364349365,
+      "test_public_macro_f1": 0.3654933455093253,
+      "test_public_accuracy": 0.4032059186189889,
+      "test_public_loss": 2.3312644958496094,
+      "num_test_public": 811
+    },
+    {
+      "augmentation": "standard",
+      "evaluation": "linear",
+      "initialization": "random_ssl",
+      "best_epoch": 76,
+      "val_macro_f1": 0.32918379054623875,
+      "val_loss": 2.5612969398498535,
+      "test_public_macro_f1": 0.3642548206048656,
+      "test_public_accuracy": 0.4093711467324291,
+      "test_public_loss": 2.400383472442627,
+      "num_test_public": 811
+    },
+    {
+      "augmentation": "standard",
+      "evaluation": "finetune",
+      "initialization": "imagenet_ssl",
+      "best_epoch": 29,
+      "val_macro_f1": 0.3613686334589057,
+      "val_loss": 2.330484366652989,
+      "test_public_macro_f1": 0.3928714163222696,
+      "test_public_accuracy": 0.42909987669543775,
+      "test_public_loss": 2.078585736407599,
+      "num_test_public": 811
+    },
+    {
+      "augmentation": "context_preserving",
+      "evaluation": "linear",
+      "initialization": "imagenet_only",
+      "best_epoch": 76,
+      "val_macro_f1": 0.4324401602132694,
+      "val_loss": 2.0479743480682373,
+      "test_public_macro_f1": 0.47752919786325354,
+      "test_public_accuracy": 0.5117139334155364,
+      "test_public_loss": 1.8264379501342773,
+      "num_test_public": 811
+    },
+    {
+      "augmentation": "context_preserving",
+      "evaluation": "linear",
+      "initialization": "imagenet_ssl",
+      "best_epoch": 14,
+      "val_macro_f1": 0.2564947901618222,
+      "val_loss": 2.7789530754089355,
+      "test_public_macro_f1": 0.1916446454839192,
+      "test_public_accuracy": 0.2219482120838471,
+      "test_public_loss": 2.7835826873779297,
+      "num_test_public": 811
+    },
+    {
+      "augmentation": "context_preserving",
+      "evaluation": "linear",
+      "initialization": "random_ssl",
+      "best_epoch": 93,
+      "val_macro_f1": 0.2840847210079113,
+      "val_loss": 2.6311256885528564,
+      "test_public_macro_f1": 0.2595963205911544,
+      "test_public_accuracy": 0.29839704069050554,
+      "test_public_loss": 2.505859613418579,
+      "num_test_public": 811
+    },
+    {
+      "augmentation": "context_preserving",
+      "evaluation": "finetune",
+      "initialization": "imagenet_ssl",
+      "best_epoch": 29,
+      "val_macro_f1": 0.3733552753829148,
+      "val_loss": 2.287323838413352,
+      "test_public_macro_f1": 0.34070969543617774,
+      "test_public_accuracy": 0.38224414303329224,
+      "test_public_loss": 2.298699761142566,
+      "num_test_public": 811
+    }
+  ],
+  "warning": "Use test_public apenas como resultado de relatório; escolha de épocas e aumentação deve ser baseada no val."
+}

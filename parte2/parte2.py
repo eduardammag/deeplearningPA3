@@ -8,6 +8,7 @@ import hashlib
 import json
 from pathlib import Path
 import random
+import sys
 import zipfile
 
 import matplotlib
@@ -20,6 +21,7 @@ from torch import nn
 from torch.utils.data import DataLoader
 from torchvision.models import resnet18, ResNet18_Weights
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'parte0'))
 from part0 import CameraTrapDataset, load_classes, MEAN, STD
 
 CEILING = 0.686
@@ -249,9 +251,9 @@ def summarize(output, results, classes):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data-dir', type=Path, default=Path('pa3_dados'))
-    parser.add_argument('--part1-zip', type=Path, default=Path('parte1trilhaA/pa3_resultados_completos.zip'))
+    parser.add_argument('--part1-zip', type=Path, default=Path('parte1trilhaA/resultados/pa3_resultados_completos.zip'))
     parser.add_argument('--ssl-checkpoint', type=Path)
-    parser.add_argument('--output-dir', type=Path, default=Path('resultados/parte2'))
+    parser.add_argument('--output-dir', type=Path, default=Path('parte2/resultados'))
     parser.add_argument('--epochs', type=int, default=30)
     parser.add_argument('--batch-size', type=int, default=16)
     parser.add_argument('--image-size', type=int, default=224)

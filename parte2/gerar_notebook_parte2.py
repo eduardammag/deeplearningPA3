@@ -4,6 +4,7 @@ from pathlib import Path
 import textwrap
 
 root = Path(__file__).resolve().parent
+project = root.parent
 cells = []
 
 
@@ -75,10 +76,15 @@ else:
     EXTRA_ARGS = ['--ssl-checkpoint', str(checkpoint)]
 print('Dados:', DATA, '\\nParte 1:', EXTRA_ARGS)
 ''')
-scripts = {name:(root/name).read_text(encoding='utf-8') for name in ('part0.py','parte2.py')}
+scripts = {
+    'part0.py': (project/'parte0/part0.py').read_text(encoding='utf-8'),
+    'parte2.py': (root/'parte2.py').read_text(encoding='utf-8'),
+}
 add('code', 'SCRIPTS = ' + repr(scripts) + '''
 \nfor name, source in SCRIPTS.items():
-    (WORK/name).write_text(source, encoding='utf-8')
+    target = WORK/'parte0'/name if name == 'part0.py' else WORK/name
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(source, encoding='utf-8')
 COMMAND = [sys.executable, '-u', 'parte2.py', '--data-dir', str(DATA),
     '--output-dir', str(OUTPUT), '--epochs', '30', '--batch-size', '16',
     '--image-size', '224', '--workers', '2'] + EXTRA_ARGS

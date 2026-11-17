@@ -54,9 +54,9 @@ def make_cam(model, tensor, target):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--model-dir', type=Path, default=Path('resultados/parte2/simclr/rotulos_5/seed_42'))
+    parser.add_argument('--model-dir', type=Path, default=Path('parte2/resultados/simclr/rotulos_5/seed_42'))
     parser.add_argument('--data-dir', type=Path, default=Path('pa3_dados'))
-    parser.add_argument('--output-dir', type=Path, default=Path('resultados/parte3'))
+    parser.add_argument('--output-dir', type=Path, default=Path('parte3/resultados'))
     args = parser.parse_args()
     torch.set_num_threads(min(torch.get_num_threads(), 4))
     checkpoint = torch.load(args.model_dir/'best.pt', map_location='cpu', weights_only=True)
@@ -164,7 +164,7 @@ def main():
         'A confiança softmax não foi calibrada: 96,69% em uma previsão errada não é uma probabilidade confiável de acerto. '
         'A resolução espacial do mapa é baixa; não delimitamos os animais nem estimamos sua área como medida objetiva. '
         'Oito exemplos não permitem concluir que todos os acertos ou erros seguem esse padrão.', '',
-        '## Reproduzir', '', 'Na raiz do projeto: `python -u parte3.py`.', '',
+        '## Reproduzir', '', 'Na raiz do projeto: `python -u parte3/parte3.py`.', '',
         '`exemplos.csv` e `exemplos.json` registram classes, confiança e arquivos. '
         '`proveniencia.json` registra checkpoint, hash e regra de seleção. '
         'Os arquivos `_gradcam.npy` guardam os mapas numéricos e `_original.png` guardam as fotos.', '',

@@ -1,9 +1,9 @@
-# Parte 2 — execução
+﻿# Parte 2 — execução
 
-Importe `PA3_Parte2_Kaggle.ipynb` no Kaggle, ative GPU e Internet e adicione:
+Importe `parte2/PA3_Parte2_Kaggle.ipynb` no Kaggle, ative GPU e Internet e adicione:
 
 - O Dataset com `pa3_dados` completo e extraído.
-- `parte1trilhaA/pa3_resultados_completos.zip`, ou os arquivos extraídos desse ZIP.
+- `parte1trilhaA/resultados/pa3_resultados_completos.zip`, ou os arquivos extraídos desse ZIP.
 
 Execute Run All. Se houver múltiplas entradas, preencha os caminhos nas variáveis
 de configuração do notebook. O notebook contém os scripts necessários.
@@ -11,13 +11,13 @@ de configuração do notebook. O notebook contém os scripts necessários.
 Alternativamente, na raiz deste projeto, com PyTorch CUDA disponível:
 
 ```powershell
-python -u parte2.py --data-dir pa3_dados --part1-zip parte1trilhaA/pa3_resultados_completos.zip --output-dir resultados/parte2
+python -u parte2/parte2.py --data-dir pa3_dados --part1-zip parte1trilhaA/resultados/pa3_resultados_completos.zip --output-dir parte2/resultados
 ```
 
 Para apenas validar os arquivos sem treinar:
 
 ```powershell
-python parte2.py --check-only
+python parte2/parte2.py --check-only
 ```
 
 O treino usa ResNet-18, 224px, batch 16, AdamW com lr 1e-4 e weight decay 1e-4,
@@ -31,7 +31,7 @@ A variabilidade reportada é de fine-tuning, condicionada ao mesmo pré-treino
 SimCLR. A cabeça inicial e a ordem dos lotes são pareadas por seed entre métodos.
 O teto de 0,686 é fornecido no enunciado, não precisa ser treinado.
 
-Saídas em `resultados/parte2/`:
+Saídas em `parte2/resultados/`:
 
 - `curva_orcamento.csv`: resultados individuais dos dez treinos.
 - `resumo_orcamento.csv`: média e desvio amostral (ddof=1).

@@ -1,0 +1,49 @@
+{
+  "epochs": 30,
+  "batch_size": 16,
+  "image_size": 224,
+  "lr": 0.0001,
+  "weight_decay": 0.0001,
+  "ssl_sha256": "328963357f92dc15998b9a3a3ac2ac8da43b94ceaf8b3a222194b1b9e5caf320",
+  "label_sha256": {
+    "rotulos_1.csv": "4869cc8285f5523006e0f4267358fba1f82fa186d1bef1bc3112d525872af076",
+    "rotulos_20.csv": "49e4caa209dacee9547517eb99d64632ee66f7aba0446b3cc6cc3a7d0d899973",
+    "rotulos_5.csv": "e79e3537371388cd76355514065b9b7c566c3223169a47014b8f924b59533829",
+    "test_public.csv": "3f40451dc3d74ba695c2003a5676c0f0c7d17bec9261242c9e7d4e7345994583",
+    "val.csv": "6c75c1dabac1262eca02d33224af327d0b9b97a4bc5ad0b9c4a099ecdefbaa8e"
+  },
+  "classes": [
+    "american_black_bear",
+    "american_crow",
+    "bird",
+    "bobcat",
+    "chicken",
+    "coyote",
+    "dog",
+    "domestic_cat",
+    "eastern_chipmunk",
+    "eastern_cottontail",
+    "eastern_fox_squirrel",
+    "eastern_gray_squirrel",
+    "grey_fox",
+    "horse",
+    "northern_raccoon",
+    "red_fox",
+    "striped_skunk",
+    "virginia_opossum",
+    "white_tailed_deer",
+    "wild_turkey",
+    "woodchuck"
+  ],
+  "selection": "val_macro_f1_then_val_loss",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "ssl_crop": [
+    0.5,
+    1.0
+  ],
+  "device": "cpu"
+}

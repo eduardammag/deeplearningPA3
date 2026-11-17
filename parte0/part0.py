@@ -330,7 +330,7 @@ def parse_args() -> argparse.Namespace:
         description="Treina as duas baselines supervisionadas da Parte 0."
     )
     parser.add_argument("--data-dir", type=Path, default=Path("pa3_dados"))
-    parser.add_argument("--output-dir", type=Path, default=Path("resultados/parte0"))
+    parser.add_argument("--output-dir", type=Path, default=Path("parte0/resultados"))
     parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--image-size", type=int, default=224)

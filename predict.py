@@ -12,15 +12,33 @@ from torch import nn
 from torchvision.models import resnet18
 
 
+def load_classes(path: Path) -> list[str]:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if not {"idx", "label"}.issubset(reader.fieldnames or []):
+            raise ValueError(f"{path} deve conter as colunas idx,label.")
+        rows = list(reader)
+    rows.sort(key=lambda row: int(row["idx"]))
+    indices = [int(row["idx"]) for row in rows]
+    if not rows or indices != list(range(len(rows))):
+        raise ValueError(f"Os índices em {path} devem começar em zero e ser contíguos.")
+    return [row["label"].strip() for row in rows]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Classifica imagens com o modelo entregue.")
-    parser.add_argument("--imagens", required=True, type=Path, help="Pasta com imagens JPG.")
+    parser.add_argument("--imagens", required=True, type=Path, help="Pasta com imagens JPG/PNG.")
     parser.add_argument("--saida", required=True, type=Path, help="CSV de saída.")
     parser.add_argument("--pesos", type=Path, default=Path(__file__).with_name("modelo_entregue.pt"))
+    parser.add_argument("--classes", type=Path, default=Path(__file__).with_name("classes.csv"))
     args = parser.parse_args()
 
+    if not args.imagens.is_dir():
+        raise SystemExit(f"Pasta de imagens não encontrada: {args.imagens}")
     checkpoint = torch.load(args.pesos, map_location="cpu", weights_only=True)
-    classes = checkpoint["class_names"]
+    classes = load_classes(args.classes)
+    if classes != checkpoint["class_names"]:
+        raise SystemExit("A ordem das classes em classes.csv não corresponde ao checkpoint entregue.")
     size = int(checkpoint["image_size"])
     mean = torch.tensor(checkpoint.get("mean", (0.485, 0.456, 0.406))).view(3, 1, 1)
     std = torch.tensor(checkpoint.get("std", (0.229, 0.224, 0.225))).view(3, 1, 1)

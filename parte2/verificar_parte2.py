@@ -60,7 +60,7 @@ def main():
         assert all(int(row['seeds']) == (3 if row['orcamento']=='5' else 1) for row in summary)
         for name in ('curva_orcamento.png','ganho_por_classe.png','ganho_por_classe.csv','RELATORIO.md'):
             assert (args.output_dir/name).stat().st_size > 0
-        notebook = json.loads(Path('PA3_Parte2_Kaggle.ipynb').read_text(encoding='utf-8'))
+        notebook = json.loads(Path('parte2/PA3_Parte2_Kaggle.ipynb').read_text(encoding='utf-8'))
         for cell in notebook['cells']:
             if cell['cell_type'] == 'code':
                 compile(cell['source'], cell['id'], 'exec')
